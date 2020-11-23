@@ -1,6 +1,5 @@
-
-import { gameFrame} from "./index.js";
-import {canvas, ctx} from "./canvas.js";
+import { ctx, canvas } from "./canvas.js";
+import { gameFrame } from "./index.js";
 
 //event handlers for the player
 let playerController = {
@@ -73,7 +72,7 @@ export const player = {
         },
 
         eatingFruit() {
-                this.lite += 4;
+                this.lite += 5;
         },
 
         update() {
@@ -86,7 +85,7 @@ export const player = {
 
                 if (playerController.right) this.x_velocity += 0.5;
 
-                this.y_velocity += 1.5; //gravity
+                this.y_velocity += 1.1; //gravity
                 this.x += this.x_velocity;
                 this.y += this.y_velocity;
                 this.x_velocity *= 0.9; //friction
@@ -110,11 +109,12 @@ export const player = {
         draw() {
                 ctx.fillStyle = 'red';
                 ctx.beginPath();
+                // ctx.ellipse(this.x+this.width, this.y, this.width/1.5, this.height/2,0, 0, 2*Math.PI);
                 ctx.fillRect(this.x, this.y, this.width, this.height)
-                ctx.fill();
+                // ctx.fill();
                 ctx.closePath();
 
-                ctx.save();
+                // ctx.save();
 
                 if (playerController.right == true && playerController.up == false) {
                         ctx.drawImage(playerRight, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
@@ -132,11 +132,11 @@ export const player = {
                 else if (playerController.left == false & playerController.right == false && playerController.up == false) {
                         ctx.drawImage(playerStand, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
                         
-                        if(this.frameX >= 2) this.frameX = 0;
+                        if(this.frameX>1) this.frameX = 0;
                         else if(gameFrame % 50 === 0) this.frameX++
 
                 }
-                else if (playerController.up == true || playerController.up == true && playerController.right == true || playerController.up == true && playerController.left == true) {
+                else if (playerController.up == true || playerController.up == true && playerController.right == true || playerController.up == true && playerController.left == true ) {
                         ctx.drawImage(playerJump, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
 
                         if (this.frameX >= 17) this.frameX = 0
@@ -144,10 +144,7 @@ export const player = {
 
                 }
 
-                ctx.restore();
-
-
-
+                // ctx.restore();
 
         }
 

@@ -3,15 +3,75 @@
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Cute Dog</title>
+
+        
         <link rel="stylesheet" href="styles.css">
 
         <script type="module" src="./js/index.js"></script>
 </head>
 <body>
         <div id="body">
-                <!-- <a id="button" href="">START GAME</a> -->
-                <button id="button" type="submit">Get Start</button>
+                <div class="cv_container first">
+                        <div class="first-top">
+                                <div class="dog">
+                                </div>
+                                <div>
+                                        <p>Hi!</p>
+                                        <p>I am a cute dog!</p>
+                                </div>
+                        </div>
+                        
+                        <div class="first-bottom">
+                                        <button id="button" type="submit">Get Start</button>
+                                        <button id="about">About me</button>
+                               
+                        </div>
+
+
+                </div>
+                <div class="cv_container second">
+
+                        <div class="left-section">
+                              
+                                <img src="./images/dog_cv.png" alt="">
+                                <p>Health: <span>100</span> </p>
+                        </div>
+                        <div class="right-section">
+                                <h1>Cute Dog</h1>
+                                <section class="about">
+                                        <h1>About Me</h1>
+                                        <ul>
+                                                <li>I can jump, move forward, move backward</li>
+                                                <li>I like eat candy</li>
+                                                <li>I'm afraid of monster</li>
+                                        </ul>
+                                      
+                                </section>
+
+                                <section class="character">
+                                        <h1>Character</h1>
+                                        <ul>
+                                                <li>eating fruit: + 5 point healthy</li>
+                                                <li>touching monster: -10 points healthy</li>
+                                        </ul>
+                                
+                                </section>
+
+                                <section class="control">
+                                        <h1>Control</h1>
+                                        <div>
+                                                <img class="arrow-left" src="./images/arrow-sign.png" alt="control">
+                                                <img class="arrow-up" src="./images/arrow-sign.png" alt="control">
+                                                <img class="arrow-right" src="./images/arrow-sign.png" alt="control">
+                                        </div>
+                                </section>
+                               
+                        </div>
+ 
+                </div>
+
+      
         </div>
         <canvas id="canvas"></canvas>
 </body>

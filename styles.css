@@ -1,44 +1,163 @@
-*{
+:root{
+        --purple:rgb(54, 18, 54);
+}
+* {
         margin: 0;
-        padding:0;
+        padding: 0;
         box-sizing: border-box;
+
 }
 
-body{
+html {
+        position: relative;
+        font-size: 10px;
+        line-height: 1.5;
+}
+
+body {
         width: 100vw;
         height: 100vh;
-        /* display: flex;
-        justify-content: center;
-        align-items: center; */
-
-        position: relative;
-      
 }
-#body{
+
+p,
+li {
+        font-size: 2.5rem;
+}
+
+h1 {
+        font-size: 4rem;
+}
+
+#body {
         width: 100%;
         height: 100%;
-        /* background-image: url("./images/BG.png"); */
-        background-color: red;
+        background-image: url("./images/BG.png");
         background-position: center;
-       background-size: cover;
+        background-size: cover;
 
-       display: flex;
-       justify-content: center;
-       align-items: center;
 
-       position: relative;
-       z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: relative;
+        z-index: 10;
 }
 
-#button{
-        width: 300px;
-        height: 60px;
-        font-size: 30px;
-        background-color: rgb(245, 245, 116);
-       position: absolute;
-       z-index: 100;
+/************************* CV  */
+.cv_container {
+        height: 80vh;
+        width: 50vw;
+        box-shadow: 0 2px 10px 4px var(--purple);
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 20px;
+
+        display: flex;
+        overflow: hidden;
 }
-#canvas{
+.second{
+        /* display: none; */
+}
+
+.left-section {
+        flex: 1;
+        background-color: rgba(252, 223, 255, 0.4);
+        text-align: center;
+
+}
+
+.left-section img {
+        max-width: 20rem;
+        height: 100%;
+        width: 100%;
+        max-height: 20rem;
+        margin-top: 5rem;
+        box-shadow: 0px 0px 10px 2px var(--purple);
+        border-radius: 5px;
+}
+
+.left-section span {
+        font-size: 7rem;
+        color: purple;
+}
+
+.right-section {
+        flex: 2;
+        margin-left: 10rem;
+}
+
+.right-section>h1 {
+        text-align: center;
+}
+
+.right-section section h1 {
+        margin: 3rem auto auto -5rem
+}
+.control img{
+        width: 5rem;
+}
+.control div{ 
+        margin-top: 2rem;
+        text-align: center;
+}
+
+.arrow-up{transform: rotate(180deg) translateY(20px);}
+.arrow-left{transform: rotate(90deg);}
+.arrow-right{transform: rotate(-90deg);}
+
+
+
+
+/*************** FIRST PAGE  */
+.first{
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+}
+.first-top{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+}
+.first-top p{
+        font-size: 4rem;
+        font-style: italic;
+        margin-left: 1rem;
+        color: var(--purple);
+}
+.dog {
+        background: transparent url('./images/dog_run.png') 0 0 no-repeat;
+        width: 302px;
+        height: 210px;
+        animation: run 1s steps(18) infinite;
+}
+
+@keyframes run {
+        100% {
+                background-position: -5436px, 0;
+        }
+}
+
+.first-bottom{
+        text-align: center;
+}
+
+#button, #about {
+        width: 20rem;
+        height: 6rem;
+        font-size: 3rem;
+        color: rgb(0, 0, 0);
+        background-color: rgb(236, 152, 225);
+        margin: 3rem;
+        box-shadow: 1px 2px 3px 1px var(--purple) ;
+        border: none;
+       
+}
+
+
+#canvas {
         position: absolute;
         z-index: 0;
         top: 0;
@@ -46,4 +165,14 @@ body{
         width: 100%;
         height: 100%;
         border: 1px solid black;
+}
+
+
+
+
+
+@media (max-width: 1000px) {
+        html {
+                font-size: 5px;
+        }
 }

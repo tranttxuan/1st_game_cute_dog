@@ -107,12 +107,15 @@ export const player = {
         },
 
         draw() {
-                ctx.beginPath();
+                // ctx.beginPath();
                 // ctx.fillRect(this.x, this.y, this.width, this.height)
                 // ctx.fill();
-                ctx.closePath();
+                // ctx.closePath();
 
-                // ctx.save();
+                ctx.save();
+
+                
+               
 
                 if (playerController.right == true && playerController.up == false) {
                         ctx.drawImage(playerRight, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
@@ -121,13 +124,16 @@ export const player = {
                         else if (gameFrame % 2 === 0) this.frameX++
                 }
                 else if (playerController.left == true && playerController.up == false) {
+                        
                         ctx.drawImage(playerLeft, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
 
                         if (this.frameX >= 20) this.frameX = 0
                         else if (gameFrame % 2 === 0) this.frameX++
+                        
                 }
 
                 else if (playerController.left == false & playerController.right == false && playerController.up == false) {
+                   
                         ctx.drawImage(playerStand, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
 
                         if (this.frameX > 1) this.frameX = 0;
@@ -142,7 +148,7 @@ export const player = {
 
                 }
 
-                // ctx.restore();
+                ctx.restore();
 
         },
         reset() {

@@ -16,7 +16,7 @@ class Obstacles {
                 this.spriteHeight = 536;
                 this.sizeRate = 8;
 
-                this.x = canvas.width*(Math.random()*5) - this.spriteWidth / this.sizeRate;
+                this.x = canvas.width*(Math.random()*2)+canvas.width;
                 this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
 
                 this.x_velocity = Math.random() * 5 + 2;
@@ -31,11 +31,10 @@ class Obstacles {
         }
 
         draw() {
-                ctx.beginPath();
-                ctx.styleFill = "blue";
+                // ctx.beginPath();
+                // ctx.styleFill = "blue";
                 // ctx.fillRect(this.x, this.y, this.spriteWidth / this.sizeRate, this.spriteHeight / this.sizeRate);
-                ctx.closePath();
-
+                // ctx.closePath();
 
                 ctx.drawImage(monster, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 15, this.y - 12, this.spriteWidth / 6, this.spriteHeight / 6);
 
@@ -53,9 +52,11 @@ class Obstacles {
 
 export const obstacle1 = new Obstacles();
 export const obstacle2 = new Obstacles();
-// obstacle2.x = canvas.width * 5 + 1000;
+export const obstacle3 = new Obstacles();
+obstacle3.x = canvas.width * 6 + 1000;
 monsterArray.push(obstacle1);
 monsterArray.push(obstacle2);
+monsterArray.push(obstacle3);
 
 
 

@@ -83,7 +83,9 @@ h1 {
 }
 #back img:hover, #back img:active{
         cursor: pointer;
+        box-shadow: 0px 0px 7px 6px var(--purple);
         background-color: var(--medium-purple);
+        border: none;
 }
 
 .right-section {

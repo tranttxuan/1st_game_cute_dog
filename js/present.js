@@ -3,14 +3,17 @@ import { gameFrame } from "./index.js";
 import { player } from './player.js';
 
 
-
+// const arrayImageSrc = ['./images/red-apple.png','./images/peach.png'];
+const a = new Image();
+a.src = "./images/red-apple.png";
+// a.src = arrayImageSrc[Math.floor(Math.random()*2)];
 class Presents {
         constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = -100;
 
-                this.width = 80;
-                this.height = 80;
+                this.width = 60;
+                this.height = 60;
 
                 this.y_velocity = Math.random() * 5 + 1;
                 this.counted = false;
@@ -21,17 +24,10 @@ class Presents {
 
         update() {
                 this.y += this.y_velocity;
-
         }
 
         draw() {
-                ctx.beginPath();
-                ctx.fillStyle = "yellow";
-                ctx.fillRect(this.x, this.y, this.width, this.height)
-                ctx.closePath();
-
-
-
+                ctx.drawImage(a, this.x, this.y, this.width, this.height);
         }
 }
 let arrayPresents = [];

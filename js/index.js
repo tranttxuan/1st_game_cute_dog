@@ -13,9 +13,20 @@ export const thirdPage = document.querySelector(".third");
 export const backBtn = document.getElementById("back");
 export const restartBtn = document.getElementById("restart");
 
-let gameFrame = 0;
+export let gameFrame = 0;
 
 
+// show score 
+function score() {
+
+        ctx.font = "bold 50px Calibri";
+        var gradient = ctx.createLinearGradient(0, 0, 150, 100);
+        gradient.addColorStop(0, "rgb(255, 0, 128)");
+        gradient.addColorStop(1, "rgb(255, 153, 51)");
+        ctx.fillStyle = gradient;
+        ctx.fillText(`Health: ${player.lite}`, 90, 90);
+
+}
 //Animation Loop
 
 function animate() {
@@ -32,11 +43,8 @@ function animate() {
         //draw presents:
         handlePresents();
 
+        score();
 
-
-        ctx.fillStyle = "red";
-        ctx.font = "30px Arial";
-        ctx.strokeText(`Health: ${player.lite}`, 10, 50)
 
 
         gameFrame++;
@@ -45,24 +53,29 @@ function animate() {
 
 
 
-export { gameFrame };
 
-startBtn.addEventListener('click',function(){
+// handle buttons 
+
+startBtn.addEventListener('click', function () {
         body.style.display = "none";
         animate();
 })
 
-aboutBtn.addEventListener('click', function(){
+aboutBtn.addEventListener('click', function () {
         firstPage.style.display = "none";
         secondPage.style.display = "flex";
 })
 
-backBtn.addEventListener('click', function(){
+backBtn.addEventListener('click', function () {
         firstPage.style.display = "flex";
         secondPage.style.display = "none";
 });
 
-restartBtn.addEventListener('click' , function(){
+restartBtn.addEventListener('click', function () {
         thirdPage.style.display = "none";
         firstPage.style.display = "flex";
 });
+
+
+
+// export { gameFrame };

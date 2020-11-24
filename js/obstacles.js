@@ -1,8 +1,9 @@
 import { canvas, ctx } from "./canvas.js";
-import { gameFrame, score } from './index.js';
+import { gameFrame, screen } from './index.js';
 import { player } from "./player.js";
+import { arrayPresents } from "./present.js";
 
-const monsterArray = [];
+let monsterArray = [];
 const monster = new Image();
 monster.src = './images/monster_walking.png';
 
@@ -35,7 +36,7 @@ class Obstacles {
                 ctx.closePath();
 
 
-                // ctx.drawImage(monster, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 15, this.y - 12, this.spriteWidth / 6, this.spriteHeight / 6);
+                ctx.drawImage(monster, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 15, this.y - 12, this.spriteWidth / 6, this.spriteHeight / 6);
 
                 if (this.frameX >= 12) this.frameX = 0
                 else if (gameFrame % 10 === 0) this.frameX++
@@ -71,6 +72,17 @@ export function handleObstacle() {
                         if (!monsterArray[i].counted) {
                                 player.hurt();
                                 monsterArray[i].counted = true;
+
+                                if (player.lite <= 0) {
+                                        console.log("die");
+                                        screen.style.display = "block";
+                                        //initial elements
+                                        player.lite = 10;
+                                        gameFrame = 0;
+                                        arrayPresents = [];
+                                        
+
+                                }
 
                         }
 

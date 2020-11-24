@@ -1,20 +1,25 @@
 import { player } from './player.js';
 import { canvas, ctx } from './canvas.js'
+import { handleBackground } from './background.js';
+import { handleObstacle } from './obstacles.js';
 import { handlePresents } from './present.js';
-import { handleObstacle} from './obstacles.js';
 
-let score = 0;
+export const startBtn = document.getElementById('button');
+export const screen = document.getElementById("body");
+
+
 let gameFrame = 0;
 
 
 //Animation Loop
 
 function animate() {
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        handleBackground();
         // draw the player
         player.update();
         player.draw();
-
 
         //draw obstacles
         handleObstacle();
@@ -33,8 +38,20 @@ function animate() {
         requestAnimationFrame(animate);
 }
 
-animate();
+// const button = document.getElementById("button");
+// // console.log("hello")
+// // console.log(button)
+// button.addEventListener('click',function(){
+//         console.log("you")
+// })
+
+// animate();
 
 
 
-export { gameFrame,score};
+export { gameFrame };
+
+startBtn.addEventListener('click',function(){
+        body.style.display = "none";
+        animate();
+})

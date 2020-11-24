@@ -3,6 +3,7 @@ import { gameFrame } from "./index.js";
 import { player } from './player.js';
 
 
+
 class Presents {
         constructor() {
                 this.x = Math.random() * canvas.width;
@@ -33,8 +34,7 @@ class Presents {
 
         }
 }
-const a = new Presents();
-let arrayPresents = [a];
+let arrayPresents = [];
 
 export function handlePresents() {
         if (gameFrame % 100 == 0) {
@@ -72,5 +72,7 @@ export function handlePresents() {
                 }
 
         }
-        console.log(arrayPresents.length)
+        
 }
+
+export {arrayPresents};

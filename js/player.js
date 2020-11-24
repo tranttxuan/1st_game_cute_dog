@@ -61,7 +61,7 @@ export const player = {
         spriteHeight: 210,
         frame: 18,
 
-        lite: 100,
+        lite: 10,
 
         hurt() {
                 this.lite -= 10;

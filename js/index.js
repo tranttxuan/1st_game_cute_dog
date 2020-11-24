@@ -33,6 +33,8 @@ function animate() {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         handleBackground();
+        //draw presents:
+        handlePresents();
         // draw the player
         player.update();
         player.draw();
@@ -40,8 +42,7 @@ function animate() {
         //draw obstacles
         handleObstacle();
 
-        //draw presents:
-        handlePresents();
+
 
         score();
 

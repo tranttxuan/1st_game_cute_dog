@@ -3,12 +3,17 @@ import { gameFrame } from "./index.js";
 import { player } from './player.js';
 
 
-// const arrayImageSrc = ['./images/red-apple.png','./images/peach.png'];
+//create an array of images to draw presents
 const a = new Image();
 a.src = "./images/red-apple.png";
-// a.src = arrayImageSrc[Math.floor(Math.random()*2)];
+const b = new Image();
+b.src = "./images/peach.png";
+const c = new Image();
+c.src = "./images/black-berry-light.png";
+const arrayPhotos = [a,b,c];
+
 class Presents {
-        constructor() {
+        constructor(photo) {
                 this.x = Math.random() * canvas.width;
                 this.y = -100;
 
@@ -18,6 +23,7 @@ class Presents {
                 this.y_velocity = Math.random() * 5 + 1;
                 this.counted = false;
                 this.image = [];
+                this.photo = photo;
 
 
         }
@@ -27,14 +33,16 @@ class Presents {
         }
 
         draw() {
-                ctx.drawImage(a, this.x, this.y, this.width, this.height);
+               
+                ctx.drawImage(this.photo, this.x, this.y, this.width, this.height);
         }
 }
 let arrayPresents = [];
 
 export function handlePresents() {
         if (gameFrame % 100 == 0) {
-                arrayPresents.push(new Presents());
+                let random = arrayPhotos[Math.floor(Math.random()*arrayPhotos.length)];
+                arrayPresents.push(new Presents(random));
         }
 
         for (let i = 0; i < arrayPresents.length; i++) {

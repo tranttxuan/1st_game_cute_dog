@@ -1,9 +1,10 @@
 import { canvas, ctx } from "./canvas.js";
-import { gameFrame, screen } from './index.js';
+import { firstPage, gameFrame, screen, thirdPage } from './index.js';
 import { player } from "./player.js";
 import { arrayPresents } from "./present.js";
 
 let monsterArray = [];
+
 const monster = new Image();
 monster.src = './images/monster_walking.png';
 
@@ -15,7 +16,7 @@ class Obstacles {
                 this.spriteHeight = 536;
                 this.sizeRate = 8;
 
-                this.x = canvas.width - this.spriteWidth / this.sizeRate;
+                this.x = canvas.width*(Math.random()*5) - this.spriteWidth / this.sizeRate;
                 this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
 
                 this.x_velocity = Math.random() * 5 + 2;
@@ -32,7 +33,7 @@ class Obstacles {
         draw() {
                 ctx.beginPath();
                 ctx.styleFill = "blue";
-                ctx.fillRect(this.x, this.y, this.spriteWidth / this.sizeRate, this.spriteHeight / this.sizeRate);
+                // ctx.fillRect(this.x, this.y, this.spriteWidth / this.sizeRate, this.spriteHeight / this.sizeRate);
                 ctx.closePath();
 
 
@@ -43,13 +44,19 @@ class Obstacles {
 
 
         }
+        reset(){
+
+                this.x = canvas.width - this.spriteWidth / this.sizeRate;
+                this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
+        }
 }
 
 export const obstacle1 = new Obstacles();
 export const obstacle2 = new Obstacles();
-obstacle2.x = canvas.width * 5 + 1000;
+// obstacle2.x = canvas.width * 5 + 1000;
 monsterArray.push(obstacle1);
 monsterArray.push(obstacle2);
+
 
 
 export function handleObstacle() {
@@ -74,13 +81,15 @@ export function handleObstacle() {
                                 monsterArray[i].counted = true;
 
                                 if (player.lite <= 0) {
-                                        console.log("die");
-                                        screen.style.display = "block";
-                                        //initial elements
-                                        player.lite = 10;
-                                        gameFrame = 0;
-                                        arrayPresents = [];
-                                        
+                                        screen.style.display = "flex";
+                                        firstPage.style.display = "none";
+                                        thirdPage.style.display = "flex";
+                                 
+                                                //initialization
+                                                player.reset();
+                                                monsterArray.forEach(each => each.reset());
+                                                gameFrame = 0;
+                                                arrayPresents = [];
 
                                 }
 

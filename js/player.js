@@ -67,10 +67,6 @@ export const player = {
                 this.lite -= 10;
         },
 
-        eatingCandy() {
-                this.lite -= 5;
-        },
-
         eatingFruit() {
                 this.lite += 5;
         },

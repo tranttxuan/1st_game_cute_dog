@@ -8,6 +8,10 @@ let monsterArray = [];
 const monster = new Image();
 monster.src = './images/monster_walking.png';
 
+const monster_gothit = new Image();
+monster_gothit.src = './images/monster_gothit.png';
+
+
 class Obstacles {
         constructor(distance) {
                 this.frameX = 0;
@@ -17,7 +21,7 @@ class Obstacles {
                 this.sizeRate = 8;
                 this.distance = distance // minimum distance between monsters
 
-                this.x = canvas.width*(Math.random()*2)+ canvas.width*this.distance;
+                this.x = canvas.width * (Math.random() * 2) + canvas.width * this.distance;
                 this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
 
                 this.x_velocity = Math.random() * 5 + 2;
@@ -36,15 +40,28 @@ class Obstacles {
                 // ctx.styleFill = "blue";
                 // ctx.fillRect(this.x, this.y, this.spriteWidth / this.sizeRate, this.spriteHeight / this.sizeRate);
                 // ctx.closePath();
+                for (let i = 0; i < monsterArray.length; i++) {
 
-                ctx.drawImage(monster, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 15, this.y - 12, this.spriteWidth / 6, this.spriteHeight / 6);
+                        if (this.counted == true) {
+                                ctx.drawImage(monster_gothit, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 15, this.y - 12, this.spriteWidth / 6, this.spriteHeight / 6);
 
-                if (this.frameX >= 12) this.frameX = 0
-                else if (gameFrame % 10 === 0) this.frameX++
+                                if (this.frameX >= 5) this.frameX = 0
+                                else if (gameFrame % 2 === 0) this.frameX++
 
 
+                        }else{
+                                ctx.drawImage(monster, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 15, this.y - 12, this.spriteWidth / 6, this.spriteHeight / 6);
+
+                                if (this.frameX >= 12) this.frameX = 0
+                                else if (gameFrame % 10 === 0) this.frameX++
+                        }
+
+
+
+
+                }
         }
-        reset(){
+        reset() {
 
                 this.x = canvas.width - this.spriteWidth / this.sizeRate;
                 this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
@@ -73,9 +90,7 @@ export function handleObstacle() {
 
         for (let i = 0; i < monsterArray.length; i++) {
 
-                if (
-                        (monsterArray[i].y <= player.y + player.height) && (player.x - monsterArray[i].spriteWidth / monsterArray[i].sizeRate <= monsterArray[i].x && monsterArray[i].x <= player.x + player.width)
-
+                if ((monsterArray[i].y <= player.y + player.height) && (player.x - monsterArray[i].spriteWidth / monsterArray[i].sizeRate <= monsterArray[i].x && monsterArray[i].x <= player.x + player.width)
                 ) {
 
                         if (!monsterArray[i].counted) {
@@ -86,12 +101,12 @@ export function handleObstacle() {
                                         screen.style.display = "flex";
                                         firstPage.style.display = "none";
                                         thirdPage.style.display = "flex";
-                                 
-                                                //initialization
-                                                player.reset();
-                                                monsterArray.forEach(each => each.reset());
-                                                gameFrame = 0;
-                                                arrayPresents = [];
+
+                                        //initialization
+                                        player.reset();
+                                        monsterArray.forEach(each => each.reset());
+                                        gameFrame = 0;
+                                        arrayPresents = [];
 
                                 }
 

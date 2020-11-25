@@ -38,7 +38,6 @@ class Presents {
         }
 }
 let arrayPresents = [];
-let arrayEated = [];
 
 export function handlePresents() {
         if (gameFrame % 100 == 0) {
@@ -66,17 +65,16 @@ export function handlePresents() {
                                 if (!arrayPresents[i].counted) {
                                         player.eatingFruit();
                                         arrayPresents[i].counted = true;
-
-                                        
                                 }
 
                                 //delete fruit
-                                arrayPresents.splice(i, 1);
+                                 arrayPresents.splice(i, 1); 
+                              
+                               
                                 
                         }else{
                                 arrayPresents[i].counted = false; 
                         }
-
 
 
                 }

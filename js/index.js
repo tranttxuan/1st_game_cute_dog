@@ -3,6 +3,7 @@ import { canvas, ctx } from './canvas.js'
 import { handleBackground } from './background.js';
 import { handleObstacle } from './obstacles.js';
 import { handlePresents } from './present.js';
+import { handlePoisons } from './poison.js';
 
 export const startBtn = document.getElementById('button');
 export const aboutBtn = document.getElementById("about");
@@ -35,6 +36,10 @@ function animate() {
         handleBackground();
         //draw presents:
         handlePresents();
+
+        //draw poisons
+        handlePoisons();
+
         // draw the player
         player.update();
         player.draw();

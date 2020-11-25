@@ -4,6 +4,8 @@ import { handleBackground } from './background.js';
 import { handleObstacle } from './obstacles.js';
 import { handlePresents } from './present.js';
 import { handlePoisons } from './poison.js';
+import { handleMilk } from './milk.js'
+import { handleSpaceShip } from './spaceship.js';
 
 export const startBtn = document.getElementById('button');
 export const aboutBtn = document.getElementById("about");
@@ -13,31 +15,46 @@ export const secondPage = document.querySelector(".second");
 export const thirdPage = document.querySelector(".third");
 export const backBtn = document.getElementById("back");
 export const restartBtn = document.getElementById("restart");
+export const scoresHTML = document.getElementById("scoreHTML");
+
+
 const audio = document.getElementById('player');
 const playBtn = document.querySelector(".playbtn");
 
 let isPLayingAudio = true;
 
+export let endGame = false;
+
 export let gameFrame = 0;
+const fruit = new Image();
+fruit.src = "./images/peach.png"
 
-
-// show score 
+// show scores and healthy points
 function score() {
-        if(player.lite <= 20){
+        if (player.lite <= 20) {
                 ctx.font = "bold 50px Calibri";
                 ctx.fillStyle = "red";
                 ctx.fillText(`Health: ${player.lite}`, 90, 90);
-        }else{
+        } else {
                 ctx.font = "bold 50px Calibri";
                 var gradient = ctx.createLinearGradient(0, 0, 150, 100);
                 gradient.addColorStop(0, "rgb(255, 0, 128)");
                 gradient.addColorStop(1, "rgb(255, 153, 51)");
                 ctx.fillStyle = gradient;
                 ctx.fillText(`Health: ${player.lite}`, 90, 90);
+                ctx.drawImage(fruit,90,100,50, 50);
+                ctx.fillText(`Scores: ${player.score}`, 150,150);
+           
         }
-      
-
 }
+
+//show scores when the end.
+export function results(){
+        ctx.font = "bold 50px Calibri";
+        ctx.fillText(`Scores: ${player.score}`, 150,150);
+}
+
+
 //Animation Loop
 
 function animate() {
@@ -46,6 +63,9 @@ function animate() {
         handleBackground();
         //draw presents:
         handlePresents();
+
+        //draw milk
+        handleMilk();
 
         //draw poisons
         handlePoisons();
@@ -56,6 +76,8 @@ function animate() {
 
         //draw obstacles
         handleObstacle();
+
+        // handleSpaceShip();
 
         score();
 
@@ -91,18 +113,22 @@ restartBtn.addEventListener('click', function () {
 
 //handle sound
 
-window.onload  = ()=>{audio.play()};
-playBtn.addEventListener('click',function(){
-        isPLayingAudio =!isPLayingAudio;
-        if(isPLayingAudio){
+window.onload = () => {
+        audio.pause();
+        audio.play();
+}
+
+playBtn.addEventListener('click', function () {
+        isPLayingAudio = !isPLayingAudio;
+        if (isPLayingAudio) {
                 audio.play();
                 playBtn.style.backgroundImage = `url("./images/volume.png")`;
-                
-        }else{
+
+        } else {
                 audio.pause();
                 playBtn.style.backgroundImage = `url("./images/no-sound.png")`;
-                
+
         }
-        
+
 })
 

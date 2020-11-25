@@ -1,5 +1,5 @@
 import { canvas, ctx } from "./canvas.js";
-import { firstPage, gameFrame, screen, thirdPage } from './index.js';
+import { firstPage, gameFrame, screen, thirdPage, scoresHTML } from './index.js';
 import { player } from "./player.js";
 import { arrayPoisons } from "./poison.js";
 import { arrayPresents } from "./present.js";
@@ -53,9 +53,6 @@ class Obstacles {
                                 else if (gameFrame % 10 === 0) this.frameX++
                         }
 
-
-
-
                 }
         }
         reset() {
@@ -101,7 +98,7 @@ export function handleObstacle() {
                                         screen.style.display = "flex";
                                         firstPage.style.display = "none";
                                         thirdPage.style.display = "flex";
-
+                                        scoresHTML.innerHTML = player.score;
 
                                         //initialization
                                         player.reset();
@@ -120,10 +117,5 @@ export function handleObstacle() {
                 } else {
                         monsterArray[i].counted = false;
                 }
-
         }
-
-
-
-
 }

@@ -1,5 +1,6 @@
 import { ctx, canvas } from "./canvas.js";
 import { gameFrame } from "./index.js";
+import { arrayShips } from "./spaceship.js";
 
 //event handlers for the player
 let playerController = {
@@ -47,7 +48,7 @@ const playerStand = new Image();
 playerStand.src = './images/dog_stand.png'
 
 
-
+//create player variable: it's a dog
 export const player = {
         x: 30,
         y: canvas.height - 170,
@@ -66,6 +67,7 @@ export const player = {
         frame: 18,
 
         lite: 100,
+        score:0,
 
         hurt() {
                 this.lite -= 10;
@@ -78,7 +80,7 @@ export const player = {
         },
 
         eatingFruit() {
-                this.lite += 5;
+                this.score +=1;
                 //sound
                 let sound1 = new Audio();
                 sound1.src = "./sounds/spell3.wav";
@@ -87,9 +89,19 @@ export const player = {
 
         },
 
+        drinkingMilk(){
+                this.lite += 20;
+        },
+
         update() {
+
+                // if(!isOnShip(this,arrayShips[0])){
+                //         console.log(this)
+                // }
+
+
                 if (playerController.up && this.isJumping == false) {
-                        this.y_velocity -= 50;
+                        this.y_velocity -= 60; //if touch spaceship ship.y
                         this.isJumping = true; //can jump to 50height, not more
                 }
 
@@ -169,7 +181,21 @@ export const player = {
                 this.x_velocity = 0;
                 this.y_velocity = 0;
                 this.lite = 100;
+                this.score = 0;
 
         },
 
 }
+
+
+// //check if dog is on ship
+// function isOnShip(dog,ship){
+//         if(dog.y + dog.height == ship.x && dog.x >= ship.x - dog.width && dog.x <= ship.x) {return true;}
+//         else {return false;}
+// }
+
+// //check if dog is touch the bottom of the ship
+// function isUnderShip(dog, ship){
+//         if(dog.y == ship.y + ship+height && dog.x >= ship.x - dog.width && dog.x <= ship.x) {return true}
+//         else {return false;}
+// }

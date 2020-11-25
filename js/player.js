@@ -73,7 +73,7 @@ export const player = {
                 let sound1 = new Audio();
                 sound1.src = "./sounds/ouch0.mp3";
                 sound1.play();
-                sound1.volume = 0.15;
+                sound1.volume = 0.5;
 
         },
 
@@ -83,7 +83,7 @@ export const player = {
                 let sound1 = new Audio();
                 sound1.src = "./sounds/spell3.wav";
                 sound1.play();
-                sound1.volume = 0.1;
+                sound1.volume = 0.15;
 
         },
 
@@ -119,15 +119,6 @@ export const player = {
         },
 
         draw() {
-                // ctx.beginPath();
-                // ctx.fillRect(this.x, this.y, this.width, this.height)
-                // ctx.fill();
-                // ctx.closePath();
-
-                // ctx.save();
-
-
-
 
                 if (playerController.right == true && playerController.up == false) {
                         ctx.drawImage(playerRight, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
@@ -169,11 +160,15 @@ export const player = {
 
         },
         reset() {
+                let goodbye = new Audio();
+                goodbye.src = "./sounds/goodbye.mp3";
+                goodbye.play();
+
                 this.x = 30;
                 this.y = canvas.height - 170;
                 this.x_velocity = 0;
                 this.y_velocity = 0;
-                this.lite = 10;
+                this.lite = 100;
 
         },
 

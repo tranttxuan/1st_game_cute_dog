@@ -23,13 +23,19 @@ export let gameFrame = 0;
 
 // show score 
 function score() {
-
-        ctx.font = "bold 50px Calibri";
-        var gradient = ctx.createLinearGradient(0, 0, 150, 100);
-        gradient.addColorStop(0, "rgb(255, 0, 128)");
-        gradient.addColorStop(1, "rgb(255, 153, 51)");
-        ctx.fillStyle = gradient;
-        ctx.fillText(`Health: ${player.lite}`, 90, 90);
+        if(player.lite <= 20){
+                ctx.font = "bold 50px Calibri";
+                ctx.fillStyle = "red";
+                ctx.fillText(`Health: ${player.lite}`, 90, 90);
+        }else{
+                ctx.font = "bold 50px Calibri";
+                var gradient = ctx.createLinearGradient(0, 0, 150, 100);
+                gradient.addColorStop(0, "rgb(255, 0, 128)");
+                gradient.addColorStop(1, "rgb(255, 153, 51)");
+                ctx.fillStyle = gradient;
+                ctx.fillText(`Health: ${player.lite}`, 90, 90);
+        }
+      
 
 }
 //Animation Loop
@@ -51,11 +57,7 @@ function animate() {
         //draw obstacles
         handleObstacle();
 
-
-
         score();
-
-
 
         gameFrame++;
         requestAnimationFrame(animate);
@@ -104,4 +106,3 @@ playBtn.addEventListener('click',function(){
         
 })
 
-// export { gameFrame };

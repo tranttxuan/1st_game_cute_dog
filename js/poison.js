@@ -17,7 +17,7 @@ class Poisons {
                 this.width = 60;
                 this.height = 60;
 
-                this.y_velocity = Math.random()*3;
+                this.y_velocity = Math.random()*5+1;
                 this.counted = false;
                 this.image = [];
                 this.fast = 0;
@@ -28,7 +28,7 @@ class Poisons {
         }
 
         update() {
-                console.log(this.x_init)
+                
                 if(this.x <= this.x_init - this.distance) {this.direction=1;}
                 else if (this.x > this.x_init) {this.direction=-1;}
                 this.x+=this.direction;
@@ -70,7 +70,6 @@ export function handlePoisons() {
                 if (arrayPoisons[i]) {
                         if (arrayPoisons[i].x - player.width <= player.x && player.x <= arrayPoisons[i].x + arrayPoisons[i].width && arrayPoisons[i].y - arrayPoisons[i].height <= player.y && player.y <= arrayPoisons[i].y + arrayPoisons[i].height) {
 
-                                // arrayPresents = [];
                                 screen.style.display = "flex";
                                 firstPage.style.display = "none";
                                 thirdPage.style.display = "flex";
@@ -78,11 +77,13 @@ export function handlePoisons() {
                                 //initialization
                                 player.reset();
                                 monsterArray.forEach(each => each.reset());
-                                arrayPoisons.splice(0, arrayPoisons.length - 1);
+                                arrayPoisons.splice(i, 1);
                                 arrayPresents.splice(0, arrayPoisons.length - 1);
+                              
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                
                                 gameFrame = 0;
 
-                                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
                         } else {

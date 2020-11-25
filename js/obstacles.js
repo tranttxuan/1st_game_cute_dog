@@ -37,10 +37,6 @@ class Obstacles {
         }
 
         draw() {
-                // ctx.beginPath();
-                // ctx.styleFill = "blue";
-                // ctx.fillRect(this.x, this.y, this.spriteWidth / this.sizeRate, this.spriteHeight / this.sizeRate);
-                // ctx.closePath();
                 for (let i = 0; i < monsterArray.length; i++) {
 
                         if (this.counted == true) {

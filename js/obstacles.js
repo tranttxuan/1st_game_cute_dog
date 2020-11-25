@@ -1,9 +1,10 @@
 import { canvas, ctx } from "./canvas.js";
 import { firstPage, gameFrame, screen, thirdPage } from './index.js';
 import { player } from "./player.js";
+import { arrayPoisons } from "./poison.js";
 import { arrayPresents } from "./present.js";
 
-let monsterArray = [];
+export let monsterArray = [];
 
 const monster = new Image();
 monster.src = './images/monster_walking.png';
@@ -63,7 +64,7 @@ class Obstacles {
         }
         reset() {
 
-                this.x = canvas.width - this.spriteWidth / this.sizeRate;
+                this.x = canvas.width * (Math.random() * 2) + canvas.width * this.distance;
                 this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
         }
 }
@@ -98,15 +99,23 @@ export function handleObstacle() {
                                 monsterArray[i].counted = true;
 
                                 if (player.lite <= 0) {
+
+                                        // arrayPresents = [];
+
                                         screen.style.display = "flex";
                                         firstPage.style.display = "none";
                                         thirdPage.style.display = "flex";
 
+
                                         //initialization
                                         player.reset();
                                         monsterArray.forEach(each => each.reset());
+                                        arrayPoisons.splice(0, arrayPoisons.length-1);
+                                        arrayPresents.splice(0, arrayPoisons.length-1);
                                         gameFrame = 0;
-                                        arrayPresents = [];
+
+                                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 
                                 }
 

@@ -13,6 +13,10 @@ export const secondPage = document.querySelector(".second");
 export const thirdPage = document.querySelector(".third");
 export const backBtn = document.getElementById("back");
 export const restartBtn = document.getElementById("restart");
+const audio = document.getElementById('player');
+const playBtn = document.querySelector(".playbtn");
+
+let isPLayingAudio = true;
 
 export let gameFrame = 0;
 
@@ -83,5 +87,21 @@ restartBtn.addEventListener('click', function () {
 });
 
 
+//handle sound
+
+window.onload  = ()=>{audio.play()};
+playBtn.addEventListener('click',function(){
+        isPLayingAudio =!isPLayingAudio;
+        if(isPLayingAudio){
+                audio.play();
+                playBtn.style.backgroundImage = `url("./images/volume.png")`;
+                
+        }else{
+                audio.pause();
+                playBtn.style.backgroundImage = `url("./images/no-sound.png")`;
+                
+        }
+        
+})
 
 // export { gameFrame };

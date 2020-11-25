@@ -12,6 +12,8 @@ const c = new Image();
 c.src = "./images/black-berry-light.png";
 const arrayPhotos = [a,b,c];
 
+
+
 class Presents {
         constructor(photo) {
                 this.x = Math.random() * canvas.width;
@@ -24,8 +26,6 @@ class Presents {
                 this.counted = false;
                 this.image = [];
                 this.photo = photo;
-
-
         }
 
         update() {
@@ -35,6 +35,11 @@ class Presents {
         draw() {
                
                 ctx.drawImage(this.photo, this.x, this.y, this.width, this.height);
+        }
+
+        reset(){
+                this.x = Math.random() * canvas.width;
+                this.y = -100;
         }
 }
 let arrayPresents = [];
@@ -61,12 +66,13 @@ export function handlePresents() {
 
                 if (arrayPresents[i]) {
                         if (arrayPresents[i].x - player.width <= player.x && player.x <= arrayPresents[i].x + arrayPresents[i].width && arrayPresents[i].y - arrayPresents[i].height <= player.y && player.y <= arrayPresents[i].y + arrayPresents[i].height) {
-
+                                
                                 if (!arrayPresents[i].counted) {
                                         player.eatingFruit();
+                                        
                                         arrayPresents[i].counted = true;
                                 }
-
+                                
                                 //delete fruit
                                  arrayPresents.splice(i, 1); 
                               

@@ -3,6 +3,7 @@
         --medium-purple: rgb(105, 36, 105);
 }
 
+
 * {
         margin: 0;
         padding: 0;
@@ -164,7 +165,9 @@ h1 {
 
 
 /*************** FIRST PAGE----  */
-
+.first{
+        position: relative;
+}
 .first-top p {
         font-size: 4rem;
         font-style: italic;
@@ -215,6 +218,26 @@ h1 {
         background-color: var(--medium-purple);
 }
 
+
+/* sound */
+.playbtn{
+        width: 30px;
+        height: 30px;
+        background-image:url("./images/volume.png");
+        background-color: transparent;
+        border: transparent;
+        background-position: center;
+        background-size: cover;
+        cursor: pointer;
+
+        position: absolute;
+        top: 10%;
+        right: 10%;
+}
+
+.playbtn:hover{
+        box-shadow: 0 2px 5px 5px var(--purple);
+}
 
 /******** THIRD PAGE - GAME OVER  */
 

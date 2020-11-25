@@ -40,8 +40,12 @@ playerLeft.src = './images/dog_run_left.png';
 const playerJump = new Image();
 playerJump.src = './images/dog_jump.png';
 
+const playerJumpLeft = new Image();
+playerJumpLeft.src = './images/dog_jump_left.png';
+
 const playerStand = new Image();
 playerStand.src = './images/dog_stand.png'
+
 
 
 export const player = {
@@ -53,7 +57,7 @@ export const player = {
         isJumping: true,
 
         width: 180, //distance between each side screen and player
-        height: 125, // distance between bottom and player 170 - 125 = 45
+        height: 125, // distance between bottom screen and player 170 - 125 = 45
 
         frameX: 0,
         frameY: 0,
@@ -61,14 +65,26 @@ export const player = {
         spriteHeight: 210,
         frame: 18,
 
-        lite: 10,
+        lite: 100,
 
         hurt() {
                 this.lite -= 10;
+                //sound 
+                let sound1 = new Audio();
+                sound1.src = "./sounds/ouch0.mp3";
+                sound1.play();
+                sound1.volume = 0.15;
+
         },
 
         eatingFruit() {
                 this.lite += 5;
+                //sound
+                let sound1 = new Audio();
+                sound1.src = "./sounds/spell3.wav";
+                sound1.play();
+                sound1.volume = 0.1;
+
         },
 
         update() {
@@ -108,10 +124,10 @@ export const player = {
                 // ctx.fill();
                 // ctx.closePath();
 
-                ctx.save();
+                // ctx.save();
 
-                
-               
+
+
 
                 if (playerController.right == true && playerController.up == false) {
                         ctx.drawImage(playerRight, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
@@ -120,28 +136,33 @@ export const player = {
                         else if (gameFrame % 2 === 0) this.frameX++
                 }
                 else if (playerController.left == true && playerController.up == false) {
-                        
+
                         ctx.drawImage(playerLeft, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
 
                         if (this.frameX >= 20) this.frameX = 0
                         else if (gameFrame % 2 === 0) this.frameX++
-                        
+
                 }
 
                 else if (playerController.left == false & playerController.right == false && playerController.up == false) {
-                   
+
                         ctx.drawImage(playerStand, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
 
                         if (this.frameX > 1) this.frameX = 0;
                         else if (gameFrame % 50 === 0) this.frameX++
 
                 }
-                else if (playerController.up == true || playerController.up == true && playerController.right == true || playerController.up == true && playerController.left == true) {
+                else if (playerController.up == true && playerController.right == false && playerController.left == false || playerController.up == true && playerController.right == true) {
                         ctx.drawImage(playerJump, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
 
                         if (this.frameX >= 17) this.frameX = 0
                         else if (gameFrame) this.frameX++;
 
+                } else if (playerController.up == true && playerController.left == true) {
+                        ctx.drawImage(playerJumpLeft, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
+
+                        if (this.frameX >= 17) this.frameX = 0
+                        else if (gameFrame) this.frameX++;
                 }
 
                 ctx.restore();

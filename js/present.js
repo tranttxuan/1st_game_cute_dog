@@ -38,6 +38,7 @@ class Presents {
         }
 }
 let arrayPresents = [];
+let arrayEated = [];
 
 export function handlePresents() {
         if (gameFrame % 100 == 0) {
@@ -53,6 +54,8 @@ export function handlePresents() {
 
         //delete present which is falling out of screen
         for (let i = 0; i < arrayPresents.length; i++) {
+
+         
                 if (arrayPresents[i].y > canvas.height) {
                         arrayPresents.splice(i, 1);
                 }
@@ -63,9 +66,12 @@ export function handlePresents() {
                                 if (!arrayPresents[i].counted) {
                                         player.eatingFruit();
                                         arrayPresents[i].counted = true;
+
+                                        
                                 }
 
                                 //delete fruit
+                                arrayPresents.splice(i, 1);
                                 
                         }else{
                                 arrayPresents[i].counted = false; 

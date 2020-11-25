@@ -9,14 +9,15 @@ const monster = new Image();
 monster.src = './images/monster_walking.png';
 
 class Obstacles {
-        constructor() {
+        constructor(distance) {
                 this.frameX = 0;
                 this.frameY = 0;
                 this.spriteWidth = 656;
                 this.spriteHeight = 536;
                 this.sizeRate = 8;
+                this.distance = distance // minimum distance between monsters
 
-                this.x = canvas.width*(Math.random()*2)+canvas.width;
+                this.x = canvas.width*(Math.random()*2)+ canvas.width*this.distance;
                 this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
 
                 this.x_velocity = Math.random() * 5 + 2;
@@ -50,10 +51,10 @@ class Obstacles {
         }
 }
 
-export const obstacle1 = new Obstacles();
-export const obstacle2 = new Obstacles();
-export const obstacle3 = new Obstacles();
-obstacle3.x = canvas.width * 6 + 1000;
+export const obstacle1 = new Obstacles(1);
+export const obstacle2 = new Obstacles(3);
+export const obstacle3 = new Obstacles(10);
+
 monsterArray.push(obstacle1);
 monsterArray.push(obstacle2);
 monsterArray.push(obstacle3);

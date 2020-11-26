@@ -2,11 +2,12 @@ import { player } from './player.js';
 import { canvas, ctx } from './canvas.js'
 import { handleBackground } from './background.js';
 import { handleObstacle } from './obstacles.js';
-import { handlePresents } from './present.js';
+import { handlePresents, arrayPhotos } from './present.js';
 import { handlePoisons } from './poison.js';
 import { handleMilk } from './milk.js'
-import { handleSpaceShip } from './spaceship.js';
 
+
+//declare DOM elements
 export const startBtn = document.getElementById('button');
 export const aboutBtn = document.getElementById("about");
 export const screen = document.getElementById("body");
@@ -17,17 +18,13 @@ export const backBtn = document.getElementById("back");
 export const restartBtn = document.getElementById("restart");
 export const scoresHTML = document.getElementById("scoreHTML");
 
-
 const audio = document.getElementById('player');
 const playBtn = document.querySelector(".playbtn");
 
 let isPLayingAudio = true;
 
-export let endGame = false;
-
 export let gameFrame = 0;
-const fruit = new Image();
-fruit.src = "./images/peach.png"
+
 
 // show scores and healthy points
 function score() {
@@ -42,22 +39,15 @@ function score() {
                 gradient.addColorStop(1, "rgb(255, 153, 51)");
                 ctx.fillStyle = gradient;
                 ctx.fillText(`Health: ${player.lite}`, 90, 90);
-                ctx.drawImage(fruit,90,100,50, 50);
+                ctx.drawImage(arrayPhotos[1],90,100,50, 50);
                 ctx.fillText(`Scores: ${player.score}`, 150,150);
            
         }
 }
 
-//show scores when the end.
-export function results(){
-        ctx.font = "bold 50px Calibri";
-        ctx.fillText(`Scores: ${player.score}`, 150,150);
-}
-
-
 //Animation Loop
 
-function animate() {
+export function animate() {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         handleBackground();
@@ -77,18 +67,17 @@ function animate() {
         //draw obstacles
         handleObstacle();
 
-        // handleSpaceShip();
-
         score();
 
         gameFrame++;
         requestAnimationFrame(animate);
+        console.log(gameFrame);
 }
 
 
 
 
-// handle buttons 
+// handle buttons in main screen
 
 startBtn.addEventListener('click', function () {
         body.style.display = "none";

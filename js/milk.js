@@ -7,6 +7,7 @@ import { player } from './player.js';
 const milk = new Image();
 milk.src = "./images/milk.png"
 
+export let arrayMilk = [];
 
 class Milk {
         constructor() {
@@ -17,24 +18,19 @@ class Milk {
                 this.height = 60;
                 this.counted = false;
                 this.y_velocity = 3;
-
         }
-
         update() {
                 this.y += this.y_velocity;
         }
-
-        draw() {
-               
+        draw() {     
                 ctx.drawImage(milk, this.x, this.y, this.width, this.height);
         }
-
         reset(){
                 this.x = 0;
                 this.y = 0;
         }
 }
-let arrayMilk = [];
+
 
 export function handleMilk() {
         if (gameFrame % 300 == 0) {
@@ -46,7 +42,7 @@ export function handleMilk() {
                 arrayMilk[i].draw();
         }
 
-        //delete present which is falling out of screen
+        //delete milk bottles which fall out of screen
         for (let i = 0; i < arrayMilk.length; i++) {
 
          
@@ -69,12 +65,6 @@ export function handleMilk() {
                         }else{
                                 arrayMilk[i].counted = false; 
                         }
-
-
                 }
-
         }
-        
 }
-
-export {arrayMilk};

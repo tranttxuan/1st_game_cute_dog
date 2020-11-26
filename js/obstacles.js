@@ -20,7 +20,7 @@ class Obstacles {
                 this.spriteWidth = 656;
                 this.spriteHeight = 536;
                 this.sizeRate = 8;
-                this.distance = distance // minimum distance between monsters
+                this.distance = distance // minimum distance between monsters at initialization.
 
                 this.x = canvas.width * (Math.random() * 2) + canvas.width * this.distance;
                 this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
@@ -33,7 +33,6 @@ class Obstacles {
         update() {
                 this.x -= this.x_velocity;
                 if (this.x < -this.spriteWidth / this.sizeRate) this.x = canvas.width - this.spriteWidth / this.sizeRate + 30;
-
         }
 
         draw() {
@@ -46,17 +45,15 @@ class Obstacles {
                                 else if (gameFrame % 2 === 0) this.frameX++
 
 
-                        }else{
+                        } else {
                                 ctx.drawImage(monster, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 15, this.y - 12, this.spriteWidth / 6, this.spriteHeight / 6);
 
                                 if (this.frameX >= 12) this.frameX = 0
                                 else if (gameFrame % 10 === 0) this.frameX++
                         }
-
                 }
         }
         reset() {
-
                 this.x = canvas.width * (Math.random() * 2) + canvas.width * this.distance;
                 this.y = canvas.height - this.spriteHeight / this.sizeRate - 45;
         }
@@ -69,7 +66,6 @@ export const obstacle3 = new Obstacles(10);
 monsterArray.push(obstacle1);
 monsterArray.push(obstacle2);
 monsterArray.push(obstacle3);
-
 
 
 export function handleObstacle() {
@@ -93,8 +89,6 @@ export function handleObstacle() {
 
                                 if (player.lite <= 0) {
 
-                                        // arrayPresents = [];
-
                                         screen.style.display = "flex";
                                         firstPage.style.display = "none";
                                         thirdPage.style.display = "flex";
@@ -103,12 +97,12 @@ export function handleObstacle() {
                                         //initialization
                                         player.reset();
                                         monsterArray.forEach(each => each.reset());
-                                        arrayPoisons.splice(0, arrayPoisons.length-1);
-                                        arrayPresents.splice(0, arrayPoisons.length-1);
-                                        gameFrame = 0;
+                                        arrayPoisons.forEach(each => each.reset());
+                                        arrayPresents.forEach(each => each.reset())
 
                                         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+                                        //make canvas stop
+                                        gameFrame = 0;
 
                                 }
 

@@ -1,12 +1,14 @@
 import { canvas, ctx } from "./canvas.js";
 import { player } from './player.js';
-import { scoresHTML, firstPage, gameFrame, screen, thirdPage } from './index.js';
+import { scoresHTML, firstPage, gameFrame, screen, thirdPage, animate } from './index.js';
 import { arrayPresents } from "./present.js";
 import { monsterArray } from "./obstacles.js";
 
-//create an array of images to draw presents
+// image to draw drug
 const poison = new Image();
 poison.src = "./images/poison.png";
+
+export let arrayPoisons = [];
 
 class Poisons {
         constructor(x) {
@@ -23,8 +25,6 @@ class Poisons {
                 this.fast = 0;
                 this.distance = 100;
                 this.direction = -1;
-
-
         }
 
         update() {
@@ -32,7 +32,6 @@ class Poisons {
                 if(this.x <= this.x_init - this.distance) {this.direction=1;}
                 else if (this.x > this.x_init) {this.direction=-1;}
                 this.x+=this.direction;
-
                 this.y += this.y_velocity;
         }
 
@@ -45,7 +44,7 @@ class Poisons {
                 this.y = -100;
         }
 }
-let arrayPoisons = [];
+
 
 
 export function handlePoisons() {
@@ -59,7 +58,7 @@ export function handlePoisons() {
 
         }
 
-        //delete present which is falling out of screen
+        //delete drug which is falling out of screen
         for (let i = 0; i < arrayPoisons.length; i++) {
 
 
@@ -68,7 +67,7 @@ export function handlePoisons() {
                 }
 
                 if (arrayPoisons[i]) {
-                        //player die when collision
+                        //dog dies following collision
                         if (arrayPoisons[i].x - player.width <= player.x && player.x <= arrayPoisons[i].x + arrayPoisons[i].width && arrayPoisons[i].y - arrayPoisons[i].height <= player.y && player.y <= arrayPoisons[i].y + arrayPoisons[i].height) {
 
                                                 screen.style.display = "flex";
@@ -79,12 +78,15 @@ export function handlePoisons() {
                                                 //initialization
                                                 player.reset();
                                                 monsterArray.forEach(each => each.reset());
-                                                arrayPoisons.splice(i, 1);
-                                                arrayPresents.splice(0, arrayPoisons.length - 1);
+                                                arrayPoisons.forEach(each => each.reset());
+                                                arrayPresents.forEach(each => each.reset())
                                               
                                                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                                                
+                                                //make canvas stop
                                                 gameFrame = 0;
+                                               
+                                        
+                                                
                    
 
                         } else {
@@ -100,5 +102,3 @@ export function handlePoisons() {
    
 
 }
-
-export { arrayPoisons };

@@ -3,15 +3,16 @@ import { gameFrame } from "./index.js";
 import { player } from './player.js';
 
 
-//create an array of images to draw presents
+//create an array of images to draw presents - fruits
 const a = new Image();
 a.src = "./images/red-apple.png";
 const b = new Image();
 b.src = "./images/peach.png";
 const c = new Image();
 c.src = "./images/black-berry-light.png";
-const arrayPhotos = [a,b,c];
+export const arrayPhotos = [a, b, c];
 
+export let arrayPresents = [];
 
 
 class Presents {
@@ -33,20 +34,21 @@ class Presents {
         }
 
         draw() {
-               
+
                 ctx.drawImage(this.photo, this.x, this.y, this.width, this.height);
         }
 
-        reset(){
+        reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = -100;
         }
 }
-let arrayPresents = [];
+
 
 export function handlePresents() {
+        //new fruit appears
         if (gameFrame % 100 == 0) {
-                let random = arrayPhotos[Math.floor(Math.random()*arrayPhotos.length)];
+                let random = arrayPhotos[Math.floor(Math.random() * arrayPhotos.length)];
                 arrayPresents.push(new Presents(random));
         }
 
@@ -56,37 +58,38 @@ export function handlePresents() {
 
         }
 
-        //delete present which is falling out of screen
+        //delete fruit which is falling out of screen
         for (let i = 0; i < arrayPresents.length; i++) {
 
-         
                 if (arrayPresents[i].y > canvas.height) {
                         arrayPresents.splice(i, 1);
                 }
 
+                //if the fruit is still on screen => detect collision
                 if (arrayPresents[i]) {
                         if (arrayPresents[i].x - player.width <= player.x && player.x <= arrayPresents[i].x + arrayPresents[i].width && arrayPresents[i].y - arrayPresents[i].height <= player.y && player.y <= arrayPresents[i].y + arrayPresents[i].height) {
-                                
+
                                 if (!arrayPresents[i].counted) {
                                         player.eatingFruit();
-                                        
                                         arrayPresents[i].counted = true;
+
+                                        //show bang
+                                        let bang = new Image();
+                                        bang.src = "./images/bang.png"
+                                        ctx.drawImage(bang,arrayPresents[i].x,arrayPresents[i].y-100, 70,70 )
                                 }
-                                
+
                                 //delete fruit
-                                 arrayPresents.splice(i, 1); 
-                              
-                               
-                                
-                        }else{
-                                arrayPresents[i].counted = false; 
+                                arrayPresents.splice(i, 1);
+
+                        } else {
+                                arrayPresents[i].counted = false;
                         }
 
 
                 }
 
         }
-        
+
 }
 
-export {arrayPresents};

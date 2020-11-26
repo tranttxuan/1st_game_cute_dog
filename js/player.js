@@ -1,6 +1,5 @@
 import { ctx, canvas } from "./canvas.js";
 import { gameFrame } from "./index.js";
-import { arrayShips } from "./spaceship.js";
 
 //event handlers for the player
 let playerController = {
@@ -67,7 +66,7 @@ export const player = {
         frame: 18,
 
         lite: 100,
-        score:0,
+        score: 0,
 
         hurt() {
                 this.lite -= 10;
@@ -80,7 +79,7 @@ export const player = {
         },
 
         eatingFruit() {
-                this.score +=1;
+                this.score += 1;
                 //sound
                 let sound1 = new Audio();
                 sound1.src = "./sounds/spell3.wav";
@@ -89,20 +88,22 @@ export const player = {
 
         },
 
-        drinkingMilk(){
-                this.lite += 20;
+        drinkingMilk() {
+                this.lite += 10;
+                //sound
+                let sound1 = new Audio();
+                sound1.src = "./sounds/drink.wav";
+                sound1.play();
+                sound1.volume = 0.3;
+
         },
 
         update() {
 
-                // if(!isOnShip(this,arrayShips[0])){
-                //         console.log(this)
-                // }
-
 
                 if (playerController.up && this.isJumping == false) {
-                        this.y_velocity -= 60; //if touch spaceship ship.y
-                        this.isJumping = true; //can jump to 50height, not more
+                        this.y_velocity -= 60;
+                        this.isJumping = true; //can jump to 60height, not more
                 }
 
                 if (playerController.left) this.x_velocity -= 0.5;
@@ -127,10 +128,11 @@ export const player = {
                 if (this.x < 30) this.x = 30;
                 else if (this.x > canvas.width - 30 - this.width) this.x = canvas.width - 30 - this.width;
 
-
         },
 
         draw() {
+
+                //the change of dog images depend on his movement direction
 
                 if (playerController.right == true && playerController.up == false) {
                         ctx.drawImage(playerRight, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 10, this.y - 8, this.spriteWidth / 1.5, this.spriteHeight / 1.5);
@@ -168,7 +170,6 @@ export const player = {
                         else if (gameFrame) this.frameX++;
                 }
 
-                ctx.restore();
 
         },
         reset() {
@@ -188,14 +189,6 @@ export const player = {
 }
 
 
-// //check if dog is on ship
-// function isOnShip(dog,ship){
-//         if(dog.y + dog.height == ship.x && dog.x >= ship.x - dog.width && dog.x <= ship.x) {return true;}
-//         else {return false;}
-// }
 
-// //check if dog is touch the bottom of the ship
-// function isUnderShip(dog, ship){
-//         if(dog.y == ship.y + ship+height && dog.x >= ship.x - dog.width && dog.x <= ship.x) {return true}
-//         else {return false;}
-// }
+
+

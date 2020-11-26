@@ -1,5 +1,5 @@
 import { ctx, canvas } from "./canvas.js";
-import { gameFrame } from "./index.js";
+import { gameFrame, state } from "./index.js";
 
 //event handlers for the player
 let playerController = {
@@ -99,34 +99,37 @@ export const player = {
         },
 
         update() {
+                if (state.current == state.getReady) {
 
+                        if (playerController.up && this.isJumping == false) {
+                                this.y_velocity -= 60;
+                                this.isJumping = true; //can jump to 60height, not more
+                        }
 
-                if (playerController.up && this.isJumping == false) {
-                        this.y_velocity -= 60;
-                        this.isJumping = true; //can jump to 60height, not more
+                        if (playerController.left) this.x_velocity -= 0.5;
+
+                        if (playerController.right) this.x_velocity += 0.5;
+
+                        this.y_velocity += 1.1; //gravity
+                        this.x += this.x_velocity;
+                        this.y += this.y_velocity;
+                        this.x_velocity *= 0.9; //friction
+                        this.y_velocity *= 0.9; //friction
+
+                        // if player is falling below floor line
+
+                        if (this.y > canvas.height - 170) {
+                                this.isJumping = false;
+                                this.y = canvas.height - 170;
+                                this.y_velocity = 0;
+                        }
+
+                        //if player is going off the left of the screen
+                        if (this.x < 30) this.x = 30;
+                        else if (this.x > canvas.width - 30 - this.width) this.x = canvas.width - 30 - this.width;
+                }else{
+                        this.reset();
                 }
-
-                if (playerController.left) this.x_velocity -= 0.5;
-
-                if (playerController.right) this.x_velocity += 0.5;
-
-                this.y_velocity += 1.1; //gravity
-                this.x += this.x_velocity;
-                this.y += this.y_velocity;
-                this.x_velocity *= 0.9; //friction
-                this.y_velocity *= 0.9; //friction
-
-                // if player is falling below floor line
-
-                if (this.y > canvas.height - 170) {
-                        this.isJumping = false;
-                        this.y = canvas.height - 170;
-                        this.y_velocity = 0;
-                }
-
-                //if player is going off the left of the screen
-                if (this.x < 30) this.x = 30;
-                else if (this.x > canvas.width - 30 - this.width) this.x = canvas.width - 30 - this.width;
 
         },
 

@@ -1,8 +1,9 @@
 import { canvas, ctx } from "./canvas.js";
 import { player } from './player.js';
-import { scoresHTML, firstPage, gameFrame, screen, thirdPage, animate } from './index.js';
+import { scoresHTML, firstPage, gameFrame, screen, thirdPage, state } from './index.js';
 import { arrayPresents } from "./present.js";
 import { monsterArray } from "./obstacles.js";
+import { arrayMilk } from "./milk.js";
 
 // image to draw drug
 const poison = new Image();
@@ -19,7 +20,7 @@ class Poisons {
                 this.width = 60;
                 this.height = 60;
 
-                this.y_velocity = Math.random()*7+1;
+                this.y_velocity = Math.random() * 7 + 1;
                 this.counted = false;
                 this.image = [];
                 this.fast = 0;
@@ -28,11 +29,14 @@ class Poisons {
         }
 
         update() {
-                
-                if(this.x <= this.x_init - this.distance) {this.direction=1;}
-                else if (this.x > this.x_init) {this.direction=-1;}
-                this.x+=this.direction;
-                this.y += this.y_velocity;
+                if (state.current == state.getReady) {
+                        if (this.x <= this.x_init - this.distance) { this.direction = 1; }
+                        else if (this.x > this.x_init) { this.direction = -1; }
+                        this.x += this.direction;
+                        this.y += this.y_velocity;
+                }else{
+                        this.reset();
+                }
         }
 
         draw() {
@@ -49,7 +53,7 @@ class Poisons {
 
 export function handlePoisons() {
         if ((gameFrame % 140) == 0) {
-                arrayPoisons.push(new Poisons(Math.random()*canvas.width));
+                arrayPoisons.push(new Poisons(Math.random() * canvas.width));
         }
 
         for (let i = 0; i < arrayPoisons.length; i++) {
@@ -70,24 +74,12 @@ export function handlePoisons() {
                         //dog dies following collision
                         if (arrayPoisons[i].x - player.width <= player.x && player.x <= arrayPoisons[i].x + arrayPoisons[i].width && arrayPoisons[i].y - arrayPoisons[i].height <= player.y && player.y <= arrayPoisons[i].y + arrayPoisons[i].height) {
 
-                                                screen.style.display = "flex";
-                                                firstPage.style.display = "none";
-                                                thirdPage.style.display = "flex";
-                                                scoresHTML.innerHTML = player.score;
-                
-                                                //initialization
-                                                player.reset();
-                                                monsterArray.forEach(each => each.reset());
-                                                arrayPoisons.forEach(each => each.reset());
-                                                arrayPresents.forEach(each => each.reset())
-                                              
-                                                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                                                //make canvas stop
-                                                gameFrame = 0;
-                                               
-                                        
-                                                
-                   
+                                screen.style.display = "flex";
+                                firstPage.style.display = "none";
+                                thirdPage.style.display = "flex";
+                                scoresHTML.innerHTML = player.score;
+                                state.current = state.gameOver;
+        
 
                         } else {
                                 arrayPoisons[i].counted = false;
@@ -97,8 +89,8 @@ export function handlePoisons() {
                 }
 
         }
-       
 
-   
+
+
 
 }

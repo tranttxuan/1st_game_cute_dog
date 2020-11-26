@@ -1,5 +1,5 @@
 import { canvas, ctx } from "./canvas.js";
-import { gameFrame } from "./index.js";
+import { gameFrame, state } from "./index.js";
 import { player } from './player.js';
 
 
@@ -30,7 +30,8 @@ class Presents {
         }
 
         update() {
-                this.y += this.y_velocity;
+                if(state.current == state.getReady) this.y += this.y_velocity;
+                else if(state.current == state.gameOver) this.reset();
         }
 
         draw() {

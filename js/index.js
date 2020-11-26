@@ -1,10 +1,10 @@
 import { player } from './player.js';
 import { canvas, ctx } from './canvas.js'
 import { handleBackground } from './background.js';
-import { handleObstacle } from './obstacles.js';
-import { handlePresents, arrayPhotos } from './present.js';
-import { handlePoisons } from './poison.js';
-import { handleMilk } from './milk.js'
+import { handleObstacle, monsterArray } from './obstacles.js';
+import { handlePresents, arrayPhotos, arrayPresents } from './present.js';
+import { arrayPoisons, handlePoisons } from './poison.js';
+import { arrayMilk, handleMilk } from './milk.js'
 
 
 //declare DOM elements
@@ -25,6 +25,12 @@ let isPLayingAudio = true;
 
 export let gameFrame = 0;
 
+export const state = {
+        current: 0,
+        getReady: 1,
+        gameOver: 2,
+}
+
 
 // show scores and healthy points
 function score() {
@@ -32,14 +38,14 @@ function score() {
                 ctx.font = "bold 50px Calibri";
                 ctx.fillStyle = "red";
                 ctx.fillText(`Health: ${player.lite}`, 90, 90);
-                
+
                 ctx.font = "bold 50px Calibri";
                 var gradient = ctx.createLinearGradient(0, 0, 150, 100);
                 gradient.addColorStop(0, "rgb(255, 0, 128)");
                 gradient.addColorStop(1, "rgb(255, 153, 51)");
                 ctx.fillStyle = gradient;
-                ctx.drawImage(arrayPhotos[1],90,100,50, 50);
-                ctx.fillText(`Scores: ${player.score}`, 150,150);
+                ctx.drawImage(arrayPhotos[1], 90, 100, 50, 50);
+                ctx.fillText(`Scores: ${player.score}`, 150, 150);
 
         } else {
                 ctx.font = "bold 50px Calibri";
@@ -48,48 +54,51 @@ function score() {
                 gradient.addColorStop(1, "rgb(255, 153, 51)");
                 ctx.fillStyle = gradient;
                 ctx.fillText(`Health: ${player.lite}`, 90, 90);
-                ctx.drawImage(arrayPhotos[1],90,100,50, 50);
-                ctx.fillText(`Scores: ${player.score}`, 150,150);
-           
+                ctx.drawImage(arrayPhotos[1], 90, 100, 50, 50);
+                ctx.fillText(`Scores: ${player.score}`, 150, 150);
+
         }
 }
+
+//gameover, res
 
 //Animation Loop
 
 export function animate() {
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        handleBackground();
-        //draw presents:
-        handlePresents();
+        if (state.current == state.getReady) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                handleBackground();
+                //draw presents:
+                handlePresents();
 
-        //draw milk
-        handleMilk();
+                //draw milk
+                handleMilk();
 
-        //draw poisons
-        handlePoisons();
+                //draw poisons
+                handlePoisons();
 
-        // draw the player
-        player.update();
-        player.draw();
+                // draw the player
+                player.update();
+                player.draw();
 
-        //draw obstacles
-        handleObstacle();
+                //draw obstacles
+                handleObstacle();
 
-        score();
+                score();
 
-        gameFrame++;
-        requestAnimationFrame(animate);
-        console.log(gameFrame);
+                gameFrame++;
+                requestAnimationFrame(animate);
+
+        }
 }
-
-
 
 
 // handle buttons in main screen
 
 startBtn.addEventListener('click', function () {
         body.style.display = "none";
+        state.current = state.getReady;
         animate();
 })
 
@@ -106,6 +115,12 @@ backBtn.addEventListener('click', function () {
 restartBtn.addEventListener('click', function () {
         thirdPage.style.display = "none";
         firstPage.style.display = "flex";
+
+        // reset all variables except monster array 
+        arrayPoisons.splice(0, arrayPoisons.length);
+        arrayPresents.splice(0, arrayPresents.length);
+        arrayMilk.splice(0, arrayMilk.length);
+
 });
 
 

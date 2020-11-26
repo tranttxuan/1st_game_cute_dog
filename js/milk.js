@@ -1,5 +1,5 @@
 import { canvas, ctx } from "./canvas.js";
-import { gameFrame } from "./index.js";
+import { gameFrame, state } from "./index.js";
 import { player } from './player.js';
 
 
@@ -20,14 +20,15 @@ class Milk {
                 this.y_velocity = 3;
         }
         update() {
-                this.y += this.y_velocity;
+                if (state.current == state.getReady) this.y += this.y_velocity;
+                else this.reset();
         }
         draw() {     
                 ctx.drawImage(milk, this.x, this.y, this.width, this.height);
         }
         reset(){
-                this.x = 0;
-                this.y = 0;
+                this.x = Math.random() * canvas.width;
+                this.y = -100;
         }
 }
 

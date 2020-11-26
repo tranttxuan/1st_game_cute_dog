@@ -1,5 +1,6 @@
 import { canvas, ctx } from "./canvas.js";
-import { firstPage, gameFrame, screen, thirdPage, scoresHTML } from './index.js';
+import { firstPage, gameFrame, screen, thirdPage, scoresHTML, state } from './index.js';
+import { arrayMilk } from "./milk.js";
 import { player } from "./player.js";
 import { arrayPoisons } from "./poison.js";
 import { arrayPresents } from "./present.js";
@@ -31,8 +32,12 @@ class Obstacles {
         }
 
         update() {
-                this.x -= this.x_velocity;
-                if (this.x < -this.spriteWidth / this.sizeRate) this.x = canvas.width - this.spriteWidth / this.sizeRate + 30;
+                if (state.current == state.getReady) {
+                        this.x -= this.x_velocity;
+                        if (this.x < -this.spriteWidth / this.sizeRate) this.x = canvas.width - this.spriteWidth / this.sizeRate + 30;
+                } else {
+                        this.reset();
+                }
         }
 
         draw() {
@@ -93,16 +98,9 @@ export function handleObstacle() {
                                         firstPage.style.display = "none";
                                         thirdPage.style.display = "flex";
                                         scoresHTML.innerHTML = player.score;
+                                        
+                                        state.current = state.gameOver;
 
-                                        //initialization
-                                        player.reset();
-                                        monsterArray.forEach(each => each.reset());
-                                        arrayPoisons.forEach(each => each.reset());
-                                        arrayPresents.forEach(each => each.reset())
-
-                                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                                        //make canvas stop
-                                        gameFrame = 0;
 
                                 }
 

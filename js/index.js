@@ -32,6 +32,15 @@ function score() {
                 ctx.font = "bold 50px Calibri";
                 ctx.fillStyle = "red";
                 ctx.fillText(`Health: ${player.lite}`, 90, 90);
+                
+                ctx.font = "bold 50px Calibri";
+                var gradient = ctx.createLinearGradient(0, 0, 150, 100);
+                gradient.addColorStop(0, "rgb(255, 0, 128)");
+                gradient.addColorStop(1, "rgb(255, 153, 51)");
+                ctx.fillStyle = gradient;
+                ctx.drawImage(arrayPhotos[1],90,100,50, 50);
+                ctx.fillText(`Scores: ${player.score}`, 150,150);
+
         } else {
                 ctx.font = "bold 50px Calibri";
                 var gradient = ctx.createLinearGradient(0, 0, 150, 100);

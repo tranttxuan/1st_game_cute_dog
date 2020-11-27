@@ -120,6 +120,10 @@ restartBtn.addEventListener('click', function () {
         arrayPoisons.splice(0, arrayPoisons.length);
         arrayPresents.splice(0, arrayPresents.length);
         arrayMilk.splice(0, arrayMilk.length);
+       
+        player.lite = 100;
+        player.score = 0;
+
 
 });
 

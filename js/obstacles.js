@@ -100,8 +100,6 @@ export function handleObstacle() {
                                         scoresHTML.innerHTML = player.score;
                                         
                                         state.current = state.gameOver;
-
-
                                 }
 
                         }

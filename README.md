@@ -3,7 +3,7 @@ This is my first project after 2 weeks learning in Ironhack.
 
 The game is created by using HTML, CSS and Javascript.
 
-You can find demo here: https://tranttxuan.github.io/cute_dog_1st_project/
+You can find demo here: https://tranttxuan.github.io/cute_dog_1st_game/
 
 Rules:
 

@@ -1,9 +1,6 @@
 import { canvas, ctx } from "./canvas.js";
-import { firstPage, gameFrame, screen, thirdPage, scoresHTML, state } from './index.js';
-import { arrayMilk } from "./milk.js";
+import { firstPage, gameFrame, screen, thirdPage, scoresHTML, state, gameOver } from './index.js';
 import { player } from "./player.js";
-import { arrayPoisons } from "./poison.js";
-import { arrayPresents } from "./present.js";
 
 export let monsterArray = [];
 
@@ -64,14 +61,17 @@ class Obstacles {
         }
 }
 
-export const obstacle1 = new Obstacles(1);
-export const obstacle2 = new Obstacles(3);
-export const obstacle3 = new Obstacles(10);
-
-monsterArray.push(obstacle1);
-monsterArray.push(obstacle2);
-monsterArray.push(obstacle3);
-
+//create only 3 monsters
+function createMonsters(number) {
+        for (let i = 0; i < number; i++) {
+                monsterArray.push(new Obstacles(Math.random()*3 + 1))
+        }
+        //player must die
+        setTimeout(() => {
+                monsterArray.push(new Obstacles(Math.random()*3 + 1))
+        }, 50000);
+}
+createMonsters(3)
 
 export function handleObstacle() {
 
@@ -91,15 +91,12 @@ export function handleObstacle() {
                         if (!monsterArray[i].counted) {
                                 player.hurt();
                                 monsterArray[i].counted = true;
-
-                                if (player.lite <= 0) {
-
-                                        screen.style.display = "flex";
-                                        firstPage.style.display = "none";
-                                        thirdPage.style.display = "flex";
-                                        scoresHTML.innerHTML = player.score;
-                                        
-                                        state.current = state.gameOver;
+                               
+                        
+                                if (player.life <= 0) {
+                                        gameOver();
+                                        player.reset();
+                                        monsterArray.forEach(each => each.reset());
                                 }
 
                         }

@@ -1,7 +1,7 @@
 import { player } from './player.js';
 import { canvas, ctx } from './canvas.js'
 import { handleBackground } from './background.js';
-import { handleObstacle, monsterArray } from './obstacles.js';
+import { handleObstacle } from './obstacles.js';
 import { handlePresents, arrayPhotos, arrayPresents } from './present.js';
 import { arrayPoisons, handlePoisons } from './poison.js';
 import { arrayMilk, handleMilk } from './milk.js'
@@ -34,10 +34,10 @@ export const state = {
 
 // show scores and healthy points
 function score() {
-        if (player.lite <= 20) {
+        if (player.life <= 20) {
                 ctx.font = "bold 50px Calibri";
                 ctx.fillStyle = "red";
-                ctx.fillText(`Health: ${player.lite}`, 90, 90);
+                ctx.fillText(`Health: ${player.life}`, 90, 90);
 
                 ctx.font = "bold 50px Calibri";
                 var gradient = ctx.createLinearGradient(0, 0, 150, 100);
@@ -53,14 +53,26 @@ function score() {
                 gradient.addColorStop(0, "rgb(255, 0, 128)");
                 gradient.addColorStop(1, "rgb(255, 153, 51)");
                 ctx.fillStyle = gradient;
-                ctx.fillText(`Health: ${player.lite}`, 90, 90);
+                ctx.fillText(`Health: ${player.life}`, 90, 90);
                 ctx.drawImage(arrayPhotos[1], 90, 100, 50, 50);
                 ctx.fillText(`Scores: ${player.score}`, 150, 150);
 
         }
 }
+//show gameOver board
+export function gameOver() {
+        screen.style.display = "flex";
+        firstPage.style.display = "none";
+        thirdPage.style.display = "flex";
+        scoresHTML.innerHTML = player.score;
+        state.current = state.gameOver;
 
-//gameover, res
+        // reset all variables 
+        arrayPoisons.splice(0, arrayPoisons.length);
+        arrayPresents.splice(0, arrayPresents.length);
+        arrayMilk.splice(0, arrayMilk.length);
+
+}
 
 //Animation Loop
 
@@ -115,15 +127,6 @@ backBtn.addEventListener('click', function () {
 restartBtn.addEventListener('click', function () {
         thirdPage.style.display = "none";
         firstPage.style.display = "flex";
-
-        // reset all variables except monster array 
-        arrayPoisons.splice(0, arrayPoisons.length);
-        arrayPresents.splice(0, arrayPresents.length);
-        arrayMilk.splice(0, arrayMilk.length);
-       
-        player.lite = 100;
-        player.score = 0;
-
 
 });
 

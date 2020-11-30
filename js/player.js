@@ -65,11 +65,11 @@ export const player = {
         spriteHeight: 210,
         frame: 18,
 
-        lite: 100,
+        life: 100,
         score: 0,
 
         hurt() {
-                this.lite -= 10;
+                this.life -= 10;
                 //sound 
                 let sound1 = new Audio();
                 sound1.src = "./sounds/ouch0.mp3";
@@ -89,7 +89,7 @@ export const player = {
         },
 
         drinkingMilk() {
-                this.lite += 10;
+                this.life += 10;
                 //sound
                 let sound1 = new Audio();
                 sound1.src = "./sounds/drink.wav";
@@ -99,6 +99,7 @@ export const player = {
         },
 
         update() {
+                
                 if (state.current == state.getReady) {
 
                         if (playerController.up && this.isJumping == false) {
@@ -184,7 +185,7 @@ export const player = {
                 this.y = canvas.height - 170;
                 this.x_velocity = 0;
                 this.y_velocity = 0;
-                this.lite = 100;
+                this.life = 100;
                 this.score = 0;
 
         },

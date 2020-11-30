@@ -1,9 +1,6 @@
 import { canvas, ctx } from "./canvas.js";
 import { player } from './player.js';
-import { scoresHTML, firstPage, gameFrame, screen, thirdPage, state } from './index.js';
-import { arrayPresents } from "./present.js";
-import { monsterArray } from "./obstacles.js";
-import { arrayMilk } from "./milk.js";
+import { scoresHTML, firstPage, gameFrame, screen, thirdPage, state, gameOver } from './index.js';
 
 // image to draw drug
 const poison = new Image();
@@ -73,13 +70,7 @@ export function handlePoisons() {
                 if (arrayPoisons[i]) {
                         //dog dies following collision
                         if (arrayPoisons[i].x - player.width <= player.x && player.x <= arrayPoisons[i].x + arrayPoisons[i].width && arrayPoisons[i].y - arrayPoisons[i].height <= player.y && player.y <= arrayPoisons[i].y + arrayPoisons[i].height) {
-
-                                screen.style.display = "flex";
-                                firstPage.style.display = "none";
-                                thirdPage.style.display = "flex";
-                                scoresHTML.innerHTML = player.score;
-                                state.current = state.gameOver;
-        
+                                gameOver();
 
                         } else {
                                 arrayPoisons[i].counted = false;
